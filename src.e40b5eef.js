@@ -107,25 +107,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 "use strict";
 
 var TickInputHandler = /** @class */function () {
-    function TickInputHandler() {
-        var inputElement = document.getElementById("ticks");
-        TickInputHandler.showResult(inputElement);
-    }
-    TickInputHandler.prototype.doWork = function (event) {
-        var target = event.target;
-        if (!TickInputHandler.isTickInput(target)) {
+    function TickInputHandler() {}
+    TickInputHandler.prototype.showResult = function (inputElement) {
+        if (!inputElement) {
             return;
         }
-        var inputElement = target;
-        TickInputHandler.showResult(inputElement);
-    };
-    TickInputHandler.showResult = function (inputElement) {
         var value = TickInputHandler.getTickInputValueAsNumber(inputElement);
         var dateTimeOutput = document.getElementById("datetime");
         if (!dateTimeOutput) {
             return;
         }
-        var dateString = TickInputHandler.parseTicks(value);
+        var dateString = this.parseTicks(value);
         if (!dateString) {
             return;
         }
@@ -135,9 +127,9 @@ var TickInputHandler = /** @class */function () {
         var firstTIndext = dateString.indexOf("T");
         var datePart = dateString.substr(0, firstTIndext);
         var timePart = dateString.substr(firstTIndext + 1);
-        dateTimeOutput.innerHTML = datePart + "<span class='pad'>T</span>" + timePart;
+        dateTimeOutput.innerHTML = "<span class=\"line\">" + datePart + "</span>" + "<span class='pad'>T</span>" + "<span class=\"line\">" + timePart + "</span>";
     };
-    TickInputHandler.parseTicks = function (ticks) {
+    TickInputHandler.prototype.parseTicks = function (ticks) {
         if (isNaN(ticks)) {
             return "____-__-__T__:__:__.____Z";
         }
@@ -152,9 +144,6 @@ var TickInputHandler = /** @class */function () {
         var date = new Date(millisecondsSinceEpoch);
         return date.toISOString();
     };
-    TickInputHandler.isTickInput = function (target) {
-        return target.tagName == 'INPUT' && target.id == 'ticks';
-    };
     TickInputHandler.getTickInputValueAsNumber = function (inputElement) {
         var valueStr = inputElement.value;
         return Number(valueStr);
@@ -164,9 +153,20 @@ var TickInputHandler = /** @class */function () {
     TickInputHandler.maxDateMilliseconds = 8640000000000000; // http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
     return TickInputHandler;
 }();
+var possibleEvents = new Set(["input", "onpropertychange", "keyup", "change", "paste"]);
 window.onload = function () {
+    var ticksInput = document.getElementById("ticks");
     var handler = new TickInputHandler();
-    document.addEventListener("keyup", handler.doWork);
+    handler.showResult(ticksInput);
+    possibleEvents.forEach(function (eventName) {
+        if (ticksInput) {
+            ticksInput.addEventListener(eventName, function (ev) {
+                var inputElement = ev.target;
+                var handler = new TickInputHandler();
+                handler.showResult(inputElement);
+            });
+        }
+    });
 };
 },{}],"..\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -197,7 +197,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53800' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51783' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
