@@ -112,12 +112,12 @@ var TickInputHandler = /** @class */function () {
         if (!inputElement) {
             return;
         }
-        var value = TickInputHandler.getTickInputValueAsNumber(inputElement);
+        var value = this.getTickInputValueAsNumber(inputElement);
         var dateTimeOutput = document.getElementById("datetime");
         if (!dateTimeOutput) {
             return;
         }
-        var dateString = this.parseTicks(value);
+        var dateString = this.convertTicksToDateTimeString(value);
         if (!dateString) {
             return;
         }
@@ -129,7 +129,7 @@ var TickInputHandler = /** @class */function () {
         var timePart = dateString.substr(firstTIndext + 1);
         dateTimeOutput.innerHTML = "<span class=\"line\">" + datePart + "</span>" + "<span class='pad'>T</span>" + "<span class=\"line\">" + timePart + "</span>";
     };
-    TickInputHandler.prototype.parseTicks = function (ticks) {
+    TickInputHandler.prototype.convertTicksToDateTimeString = function (ticks) {
         if (isNaN(ticks)) {
             return "____-__-__T__:__:__.____Z";
         }
@@ -144,7 +144,7 @@ var TickInputHandler = /** @class */function () {
         var date = new Date(millisecondsSinceEpoch);
         return date.toISOString();
     };
-    TickInputHandler.getTickInputValueAsNumber = function (inputElement) {
+    TickInputHandler.prototype.getTickInputValueAsNumber = function (inputElement) {
         var valueStr = inputElement.value;
         return Number(valueStr);
     };
@@ -197,7 +197,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51783' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51904' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
