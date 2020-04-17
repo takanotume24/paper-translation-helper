@@ -45,7 +45,7 @@ class TickInputHandler {
             + timePart;
     }
 
-    static parseTicks(ticks: number) {
+    static parseTicks(ticks: number): string {
         if (isNaN(ticks)) {
             return "____-__-__T__:__:__.____Z";
         }
