@@ -1,4 +1,5 @@
 class OriginalInputHandler {
+    static readonly WORD_LIMIT = 4500
 
     constructor() {
         var original_element = document.getElementById("original") as HTMLInputElement;
@@ -20,6 +21,9 @@ class OriginalInputHandler {
         }
 
         var source = original_element.value;
+        if (!source) {
+            return
+        }
         source = source.replace(/-\n/g, "")
         source = source.replace(/\n/g, " ")
         source = source.replace(/- /g, "")
@@ -28,27 +32,54 @@ class OriginalInputHandler {
         source = source.replace(/Prof. /g, "Prof.")
         source = source.replace(/Eq. /g, "Eq.")
         source = source.replace(/et al. /g, "et al.")
-        var result_string = ""
         const strings = source.split(". ").map(str => `${str}.`)
-        const WORD_LIMIT = 4500
-        var word_count = 0
-        strings.forEach(
-            string => {
-                result_string += `${string}\n`
-                word_count += string.length
-                if (word_count > WORD_LIMIT) {
-                    result_string += `\n==================\n\n`
-                    word_count = 0
+        var results: string[][] = this.spilit_array(strings)
+
+        console.log(results)
+        converted_element.innerHTML = this.show_boxes(results)
+    }
+
+    static show_boxes(stringss: string[][]): string {
+        var result = ""
+        var i = 0
+        stringss.forEach(strings => {
+            result += this.in_box(strings.join(""), i++)
+        })
+        return result
+    }
+    static in_box(string: string, colmn_num: number): string {
+        return `<li class="list-group-item"><label>No.${colmn_num}, Number of characters : ${string.length}</label><textarea class="form-control">${string}</textarea></li>`
+    }
+
+    static spilit_array(strings: string[]): string[][] {
+
+        var char_count = 0
+        var results = []
+        var i = 0
+
+        while (i < strings.length) {
+            var new_array: string[] = []
+            while (char_count < this.WORD_LIMIT) {
+                if (i < strings.length) {
+                    new_array.push(strings[i])
+                    char_count += strings[i].length
+                    i++
+                } else {
+                    break
                 }
             }
-        )
-        console.log(strings)
-        converted_element.innerHTML = result_string
+            char_count = 0
+            results.push(new_array)
+        }
+        return results
     }
 
 }
 
 window.onload = () => {
     var handler = new OriginalInputHandler();
-    document.addEventListener("keyup", handler.doWork);
+    var original_element = document.getElementById("original")
+    if (original_element) {
+        original_element.addEventListener("keyup", handler.doWork);
+    }
 };
