@@ -45,14 +45,23 @@
             </div>
         </nav>
         <div class="form-group">
-            <label>Paste here.</label>
-            <textarea id="original" autofocus="autofocus" class="form-control"></textarea>
+            <label for="original">Input</label>
+            <textarea id="original" autofocus="autofocus" class="form-control" placeholder="Paste Here."></textarea>
         </div>
         <div class="list-group">
             <label id="converted"></label>
         </div>
 
         <script src="./index.ts"></script>
+    </div>
+    <div class="container">
+        <label for="char_limit">Option</label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Character limit (approx.)</span>
+            </div>
+            <input type="text" class="form-control" id="char_limit" value="4500" placeholder="More than 100">
+        </div>
     </div>
 </body>
 
