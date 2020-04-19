@@ -39,7 +39,6 @@ class OriginalInputHandler {
         const strings = source.split(". ").map(str => `${str}.\n`)
         var results: string[][] = this.spilit_array(strings)
 
-        console.log(results)
         converted_element.innerHTML = this.show_boxes(results)
     }
 
