@@ -14,9 +14,9 @@ class OriginalInputHandler {
     private showResult(original_element: HTMLInputElement) {
         const char_limit_element = document.getElementById("char_limit") as HTMLInputElement
         this.char_limit = Number(char_limit_element.value)
-        if (this.char_limit < 100) {
-            this.char_limit = 100
-            char_limit_element.value = "100"
+        if (this.char_limit < 1000) {
+            this.char_limit = 1000
+            char_limit_element.value = "1000"
         }
 
         var converted_element = document.getElementById("converted");
