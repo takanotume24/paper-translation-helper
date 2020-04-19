@@ -69,13 +69,16 @@ class OriginalInputHandler {
         while (i < strings.length) {
             var new_array: string[] = []
             while (char_count < this.char_limit) {
-                if (i < strings.length) {
-                    new_array.push(strings[i])
-                    char_count += strings[i].length
-                    i++
-                } else {
+                if (strings.length <= i) {
                     break
                 }
+                if (char_count + strings[i].length > this.char_limit) {
+                    break
+                }
+                new_array.push(strings[i])
+                char_count += strings[i].length
+                i++
+
             }
             char_count = 0
             results.push(new_array)
