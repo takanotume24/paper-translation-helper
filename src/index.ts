@@ -36,6 +36,9 @@ class OriginalInputHandler {
         source = source.replace(/Prof\. /g, "Prof.")
         source = source.replace(/Eq\. /g, "Eq.")
         source = source.replace(/et al\. /g, "et al.")
+        source = source.replace(/Dr\. /g, "Dr.")
+        source = source.replace(/e\.g\. /g, "e.g.")
+
         const strings = source.split(". ").map(str => `${str}.\n`)
         var results: string[][] = this.spilit_array(strings)
 
