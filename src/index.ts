@@ -11,6 +11,8 @@ class OriginalInputHandler {
         this.showResult(original_element);
     }
 
+
+
     private showResult(original_element: HTMLInputElement) {
         const char_limit_element = document.getElementById("char_limit") as HTMLInputElement
         this.char_limit = Number(char_limit_element.value)
@@ -38,6 +40,7 @@ class OriginalInputHandler {
         source = source.replace(/et al\. /g, "et al.")
         source = source.replace(/Dr\. /g, "Dr.")
         source = source.replace(/e\.g\. /g, "e.g.")
+        source = source.replace(/\.[\d+,]+[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
 
         const strings = source.split(". ").map(str => `${str}.\n`)
         var results: string[][] = this.spilit_array(strings)
