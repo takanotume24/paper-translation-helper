@@ -41,6 +41,7 @@ class OriginalInputHandler {
         source = source.replace(/Dr\. /g, "Dr.")
         source = source.replace(/e\.g\. /g, "e.g.")
         source = source.replace(/\.[\d+,]+[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
+        source = source.replace(/\.[\d+]–[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology", "–" is not hyphen ...
 
         const strings = source.split(". ").map(str => `${str}.\n`)
         var results: string[][] = this.spilit_array(strings)
