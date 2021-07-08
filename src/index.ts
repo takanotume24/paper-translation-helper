@@ -1,5 +1,7 @@
 class OriginalInputHandler {
     private char_limit: number
+
+
     constructor() {
         this.char_limit = 4500
         var original_element = document.getElementById("original") as HTMLInputElement;
@@ -45,7 +47,7 @@ class OriginalInputHandler {
         source = source.replace(/\.[\d+]–[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology", "–" is dash
 
         const strings = source.split(". ").map(str => `${str}.\n`)
-        var results: string[][] = this.spilit_array(strings)
+        var results: string[][] = this.split_array(strings)
 
         converted_element.innerHTML = this.show_boxes(results)
     }
@@ -67,7 +69,7 @@ class OriginalInputHandler {
             <textarea class="form-control" id=${text_area_id}>${string}</textarea></li>`
     }
 
-    private spilit_array(strings: string[]): string[][] {
+    private split_array(strings: string[]): string[][] {
 
         var char_count = 0
         var results = []
@@ -91,6 +93,25 @@ class OriginalInputHandler {
             results.push(new_array)
         }
         return results
+    }
+
+    private delete_last_period(arr: string[][]): string[][] {
+        var last_arr = arr.pop()
+        if (!last_arr) {
+            return [[""]]
+        }
+
+        var last_word = last_arr.pop()
+        last_word = last_word?.replace(/\.$/, "")
+
+        if (!last_word) {
+            return [[""]]
+        }
+
+        last_arr.push(last_word)
+        arr.push(last_arr)
+
+        return arr
     }
 
 }

@@ -14,12 +14,18 @@
     "build": "cross-env NODE_ENV=production parcel build src/index.html --public-url .",
     "watch": "parcel watch src/index.html",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.24",
     "cross-env": "^7.0.2",
     "gh-pages": "^2.2.0",
+    "jest": "^27.0.6",
     "parcel-bundler": "^1.12.4",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
     "typescript": "^3.8.3"
-  }
+  },
+  "dependencies": {}
 }
