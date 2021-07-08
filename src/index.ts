@@ -1,3 +1,6 @@
+import { Helper } from "../src/helper/helper"
+import { Type } from "../src/type/type"
+
 class OriginalInputHandler {
     private char_limit: number
 
@@ -47,12 +50,12 @@ class OriginalInputHandler {
         source = source.replace(/\.[\d+]–[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology", "–" is dash
 
         const strings = source.split(". ").map(str => `${str}.\n`)
-        var results: string[][] = this.split_array(strings)
+        var results: Type.columns = this.split_array(strings)
 
         converted_element.innerHTML = this.show_boxes(results)
     }
 
-    private show_boxes(stringss: string[][]): string {
+    private show_boxes(stringss: Type.columns): string {
         var result = ""
         var i = 0
         stringss.forEach(strings => {
@@ -69,14 +72,14 @@ class OriginalInputHandler {
             <textarea class="form-control" id=${text_area_id}>${string}</textarea></li>`
     }
 
-    private split_array(strings: string[]): string[][] {
+    private split_array(strings: Type.strings): Type.columns {
 
         var char_count = 0
         var results = []
         var i = 0
 
         while (i < strings.length) {
-            var new_array: string[] = []
+            var new_array: Type.strings = []
             while (char_count < this.char_limit) {
                 if (strings.length <= i) {
                     break
@@ -92,28 +95,11 @@ class OriginalInputHandler {
             char_count = 0
             results.push(new_array)
         }
-        return results
+        const results_deleted_period = Helper.delete_last_period(results)
+        const results_deleted_empty_string = Helper.delete_last_empty_string(results_deleted_period)
+        console.log(results_deleted_empty_string)
+        return results_deleted_empty_string
     }
-
-    private delete_last_period(arr: string[][]): string[][] {
-        var last_arr = arr.pop()
-        if (!last_arr) {
-            return [[""]]
-        }
-
-        var last_word = last_arr.pop()
-        last_word = last_word?.replace(/\.$/, "")
-
-        if (!last_word) {
-            return [[""]]
-        }
-
-        last_arr.push(last_word)
-        arr.push(last_arr)
-
-        return arr
-    }
-
 }
 
 window.onload = () => {
