@@ -63,11 +63,11 @@ class OriginalInputHandler {
         })
         return result
     }
-    private in_box(string: string, colmn_num: number): string {
-        const text_area_id = `"text_area_${colmn_num}"`
+    private in_box(string: string, column_num: number): string {
+        const text_area_id = `"text_area_${column_num}"`
         return `<li class="list-group-item">
             <label for=${text_area_id}>
-                No.${colmn_num}, Number of characters : ${string.length}
+                No.${column_num}, Number of characters : ${string.length}
             </label>
             <textarea class="form-control" id=${text_area_id}>${string}</textarea></li>`
     }
@@ -97,7 +97,6 @@ class OriginalInputHandler {
         }
         const results_deleted_period = Helper.delete_last_period(results)
         const results_deleted_empty_string = Helper.delete_last_empty_string(results_deleted_period)
-        console.log(results_deleted_empty_string)
         return results_deleted_empty_string
     }
 }
