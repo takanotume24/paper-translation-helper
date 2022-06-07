@@ -47,6 +47,7 @@ class OriginalInputHandler {
         source = source.replace(/e\.g\. /g, "e.g.")
         source = source.replace(/i\.e\. /g, "i.e.")
         source = source.replace(/Sec\. /g, "Sec.")
+        source = source.replace(/Sect\. /g, "Sect.")
         source = source.replace(/Tab\. /g, "Tab.")
         source = source.replace(/\.[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
         source = source.replace(/\.[\d+,]+[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
