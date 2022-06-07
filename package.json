@@ -22,6 +22,7 @@
     "cross-env": "^7.0.3",
     "gh-pages": "^4.0.0",
     "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
     "parcel-bundler": "^1.12.4",
     "ts-jest": "^28.0.4",
     "ts-node": "^10.8.1",
