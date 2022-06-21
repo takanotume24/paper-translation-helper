@@ -39,6 +39,7 @@ class OriginalInputHandler {
         source = source.replace(/\n/g, " ")
         source = source.replace(/- /g, "")
         source = source.replace(/Fig\. /g, "Fig.")
+        source = source.replace(/Figs\. /g, "Figs.")
         source = source.replace(/No\. /g, "No.")
         source = source.replace(/Prof\. /g, "Prof.")
         source = source.replace(/Eq\. /g, "Eq.")
