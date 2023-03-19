@@ -49,7 +49,16 @@ class OriginalInputHandler {
         source = source.replace(/i\.e\. /g, "i.e.")
         source = source.replace(/Sec\. /g, "Sec.")
         source = source.replace(/Sect\. /g, "Sect.")
-        source = source.replace(/Tab\. /g, "Tab.")
+        source = source.replace(/I\. /g, "I.")
+        source = source.replace(/II\. /g, "II.")
+        source = source.replace(/III\. /g, "III.")
+        source = source.replace(/IV\. /g, "IV.")
+        source = source.replace(/V\. /g, "V.")
+        source = source.replace(/VI\. /g, "VI.")
+        source = source.replace(/VII\. /g, "VII.")
+        source = source.replace(/VIII\. /g, "VIII.")
+        source = source.replace(/IX\. /g, "IX.")
+        source = source.replace(/X\. /g, "X.")
         source = source.replace(/\.[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
         source = source.replace(/\.[\d+,]+[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
         source = source.replace(/\.[\d+]–[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology", "–" is dash
