@@ -30,13 +30,13 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: install dependencies
       run: |
-        yarn install
+        npm install
     - name: run test
       run: |
-        yarn run test
+        npm run test
     - name: build
       run: |
-        yarn build
+        npm run build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
