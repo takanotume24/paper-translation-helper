@@ -59,6 +59,7 @@ class OriginalInputHandler {
         source = source.replace(/VIII\. /g, "VIII.")
         source = source.replace(/IX\. /g, "IX.")
         source = source.replace(/X\. /g, "X.")
+        source = source.replace(/2\.4 GHz/g, "2.4GHz") // とりあえず
         source = source.replace(/\.[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
         source = source.replace(/\.[\d+,]+[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
         source = source.replace(/\.[\d+]–[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology", "–" is dash
@@ -77,6 +78,7 @@ class OriginalInputHandler {
         })
         return result
     }
+    
     private in_box(string: string, column_num: number): string {
         const text_area_id = `"text_area_${column_num}"`
         return `<li class="list-group-item">
