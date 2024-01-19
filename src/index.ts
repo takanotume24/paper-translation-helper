@@ -1,124 +1,116 @@
-import { Helper } from "../src/helper/helper"
-import { Type } from "../src/type/type"
-
 class OriginalInputHandler {
-    private char_limit: number
-
+    private charLimit = 4500;
 
     constructor() {
-        this.char_limit = 4500
-        var original_element = document.getElementById("original") as HTMLInputElement;
-        this.showResult(original_element);
+        this.initializeEventListeners();
     }
 
-    public doWork = () => {
-        var original_element = document.getElementById("original") as HTMLInputElement;
-        this.showResult(original_element);
+    private initializeEventListeners() {
+        window.onload = () => {
+            const originalElement = document.getElementById("original");
+            const charLimitElement = document.getElementById("char_limit");
+
+            originalElement?.addEventListener("input", this.handleInput);
+            charLimitElement?.addEventListener("change", this.handleInput);
+        };
     }
 
+    private handleInput = (): void => {
+        const originalElement = document.getElementById("original") as HTMLInputElement | null;
+        const charLimitElement = document.getElementById("char_limit") as HTMLInputElement | null;
 
+        if (!originalElement || !charLimitElement) return;
 
-    private showResult(original_element: HTMLInputElement) {
-        const char_limit_element = document.getElementById("char_limit") as HTMLInputElement
-        this.char_limit = Number(char_limit_element.value)
-        if (this.char_limit < 1000) {
-            this.char_limit = 1000
-            char_limit_element.value = "1000"
-        }
+        this.charLimit = Math.max(Number(charLimitElement.value), 1000);
+        charLimitElement.value = this.charLimit.toString();
 
-        var converted_element = document.getElementById("converted");
-        if (!converted_element) {
-            return;
-        }
+        const source = originalElement.value;
+        if (!source) return;
 
-        var source = original_element.value;
-        if (!source) {
-            return
-        }
-        source = source.replace(/-\n/g, "")
-        source = source.replace(/\n/g, " ")
-        source = source.replace(/- /g, "")
-        source = source.replace(/Fig\. /g, "Fig.")
-        source = source.replace(/Figs\. /g, "Figs.")
-        source = source.replace(/No\. /g, "No.")
-        source = source.replace(/Prof\. /g, "Prof.")
-        source = source.replace(/Eq\. /g, "Eq.")
-        source = source.replace(/et al\. /g, "et al.")
-        source = source.replace(/Dr\. /g, "Dr.")
-        source = source.replace(/e\.g\. /g, "e.g.")
-        source = source.replace(/i\.e\. /g, "i.e.")
-        source = source.replace(/Sec\. /g, "Sec.")
-        source = source.replace(/Sect\. /g, "Sect.")
-        source = source.replace(/I\. /g, "I.")
-        source = source.replace(/II\. /g, "II.")
-        source = source.replace(/III\. /g, "III.")
-        source = source.replace(/IV\. /g, "IV.")
-        source = source.replace(/V\. /g, "V.")
-        source = source.replace(/VI\. /g, "VI.")
-        source = source.replace(/VII\. /g, "VII.")
-        source = source.replace(/VIII\. /g, "VIII.")
-        source = source.replace(/IX\. /g, "IX.")
-        source = source.replace(/X\. /g, "X.")
-        source = source.replace(/2\.4 GHz/g, "2.4GHz") // とりあえず
-        source = source.replace(/\.[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
-        source = source.replace(/\.[\d+,]+[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology"
-        source = source.replace(/\.[\d+]–[\d+](?= [A-Z])/g, "[$&]. ") //for "Neurology", "–" is dash
-
-        const strings = source.split(". ").map(str => `${str}.\n`)
-        var results: Type.columns = this.split_array(strings)
-
-        converted_element.innerHTML = this.show_boxes(results)
+        const convertedText = this.processText(source);
+        this.displayConvertedText(convertedText);
     }
 
-    private show_boxes(stringss: Type.columns): string {
-        var result = ""
-        var i = 0
-        stringss.forEach(strings => {
-            result += this.in_box(strings.join(""), i++)
-        })
-        return result
+    private processText(text: string): string {
+        const replacements: [RegExp, string | ((substring: string) => string)][] = [
+        [/-\n/g, ""], // Removes hyphen followed by a newline
+            [/\n/g, " "], // Replaces newlines with spaces
+            [/- /g, ""], // Removes hyphens followed by a space
+            [/Fig\. /g, "Fig."], // Formats abbreviation for "Figure"
+            [/Figs\. /g, "Figs."], // Formats abbreviation for "Figures"
+            [/No\. /g, "No."], // Formats abbreviation for "Number"
+            [/Prof\. /g, "Prof."], // Formats abbreviation for "Professor"
+            [/Eq\. /g, "Eq."], // Formats abbreviation for "Equation"
+            [/et al\. /g, "et al."], // Formats "et al."
+            [/Dr\. /g, "Dr."], // Formats abbreviation for "Doctor"
+            [/e\.g\. /g, "e.g."], // Formats "e.g."
+            [/i\.e\. /g, "i.e."], // Formats "i.e."
+            [/Sec\. /g, "Sec."], // Formats abbreviation for "Section"
+            [/Sect\. /g, "Sect."], // Formats abbreviation for "Section"
+            [/2\.4 GHz/g, "2.4GHz"], // Formats specific frequency value
+            [/[IVXLCDM]+\.\s/g, match => match.trim() + ". "], // Formats Roman numerals followed by a period
+            [/\.\d+(?= [A-Z])/g, match => "[" + match + "]. "], // Formats decimal numbers followed by an uppercase letter
+            [/\.\d+,\d+(?= [A-Z])/g, match => "[" + match + "]. "], // Formats numbers with commas
+            [/\.\d+–\d+(?= [A-Z])/g, match => "[" + match + "]. "] // Formats number ranges
+    
+        ];
+    
+        let processedText = text;
+        replacements.forEach(([regex, replacement]) => {
+            if (typeof replacement === "function") {
+                processedText = processedText.replace(regex, replacement);
+            } else {
+                processedText = processedText.replace(regex, replacement);
+            }
+        });
+    
+        const sentences = processedText.split(". ").map(str => `${str}.\n`);
+        const formattedText = this.splitIntoColumns(sentences);
+    
+        return this.createHtmlForColumns(formattedText);
     }
     
-    private in_box(string: string, column_num: number): string {
-        const text_area_id = `"text_area_${column_num}"`
-        return `<li class="list-group-item">
-            <label for=${text_area_id}>
-                No.${column_num}, Number of characters : ${string.length}
-            </label>
-            <textarea class="form-control" id=${text_area_id}>${string}</textarea></li>`
+
+    private splitIntoColumns(sentences: string[]): string[][] {
+        let charCount = 0;
+        let results: string[][] = [];
+        let currentColumn: string[] = [];
+
+        sentences.forEach(sentence => {
+            if (charCount + sentence.length > this.charLimit) {
+                results.push(currentColumn);
+                currentColumn = [];
+                charCount = 0;
+            }
+
+            currentColumn.push(sentence);
+            charCount += sentence.length;
+        });
+
+        if (currentColumn.length > 0) {
+            results.push(currentColumn);
+        }
+
+        return results;
     }
 
-    private split_array(strings: Type.strings): Type.columns {
+    private createHtmlForColumns(columns: string[][]): string {
+        return columns.map((column, index) => 
+            `<li class="list-group-item">
+                <label for="text_area_${index}">
+                    No.${index}, Number of characters : ${column.join("").length}
+                </label>
+                <textarea class="form-control" id="text_area_${index}">${column.join("")}</textarea>
+            </li>`
+        ).join("");
+    }
 
-        var char_count = 0
-        var results = []
-        var i = 0
+    private displayConvertedText(html: string): void {
+        const convertedElement = document.getElementById("converted");
+        if (!convertedElement) return;
 
-        while (i < strings.length) {
-            var new_array: Type.strings = []
-            while (char_count < this.char_limit) {
-                if (strings.length <= i) {
-                    break
-                }
-                if (char_count + strings[i].length > this.char_limit) {
-                    break
-                }
-                new_array.push(strings[i])
-                char_count += strings[i].length
-                i++
-
-            }
-            char_count = 0
-            results.push(new_array)
-        }
-        const results_deleted_period = Helper.delete_last_period(results)
-        const results_deleted_empty_string = Helper.delete_last_empty_string(results_deleted_period)
-        return results_deleted_empty_string
+        convertedElement.innerHTML = html;
     }
 }
 
-window.onload = () => {
-    var handler = new OriginalInputHandler();
-    document.getElementById("original")?.addEventListener("input", handler.doWork);
-    document.getElementById("char_limit")?.addEventListener("change", handler.doWork)
-};
+new OriginalInputHandler();
