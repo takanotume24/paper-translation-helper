@@ -1,5 +1,5 @@
-import { Helper } from "../src/helper/helper"
-import { Type } from "../src/type/type"
+import { Helper } from "../helper"
+import { Type } from "../../type/type"
 
 describe("Helper.delete_last_period()", () => {
     test("テストが正常に動作している", () => {

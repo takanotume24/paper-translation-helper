@@ -193,7 +193,8 @@ module.exports = {
   // watchman: true,
 
   roots: [
-    "<rootDir>/test"
+    "<rootDir>/src/lib/test",
+    "<rootDir>/src/helper/test"
   ],
 
   transform: {
