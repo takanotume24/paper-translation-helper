@@ -33,7 +33,7 @@ class OriginalInputHandler {
 
     private processText(text: string): string {
         const replacements: [RegExp, string | ((substring: string) => string)][] = [
-        [/-\n/g, ""], // Removes hyphen followed by a newline
+            [/-\n/g, ""], // Removes hyphen followed by a newline
             [/\n/g, " "], // Replaces newlines with spaces
             [/- /g, ""], // Removes hyphens followed by a space
             [/Fig\. /g, "Fig."], // Formats abbreviation for "Figure"
