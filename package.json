@@ -18,6 +18,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@types/bootstrap": "^5.2.10",
     "@types/jest": "^29.5.11",
     "@types/uuid": "^9.0.7",
     "cross-env": "^7.0.3",
