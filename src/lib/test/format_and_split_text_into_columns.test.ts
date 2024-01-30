@@ -40,6 +40,18 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [Section. ]', () => {
+        const testString = "In our analysis, we found significant discrepancies in the data; Section. 3.2 of the report details these findings and their implications for the project. The implementation plan is divided into several phases, as outlined in the document; Section. 4.1 specifically discusses the initial deployment strategy and resource allocation.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['In our analysis, we found significant discrepancies in the data; Section. 3.2 of the report details these findings and their implications for the project.'],
+            ['The implementation plan is divided into several phases, as outlined in the document; Section. 4.1 specifically discusses the initial deployment strategy and resource allocation.']
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
+
     // Test for hyphen followed by newline
     it('should remove hyphen followed by newline', () => {
         const testString = "Test-\nString";
