@@ -29,6 +29,17 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [etc. ]', () => {
+        const testString = "In this project, we will explore various aspects of environmental science, including climate change, renewable energy sources, biodiversity conservation, etc. , and their implications for future policy making. In this project, we will explore various aspects of environmental science, including climate change, renewable energy sources, biodiversity conservation, etc. , and their implications for future policy making.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['In this project, we will explore various aspects of environmental science, including climate change, renewable energy sources, biodiversity conservation, etc. , and their implications for future policy making.'],
+            ['In this project, we will explore various aspects of environmental science, including climate change, renewable energy sources, biodiversity conservation, etc. , and their implications for future policy making.']
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
     // Test for hyphen followed by newline
     it('should remove hyphen followed by newline', () => {
         const testString = "Test-\nString";
