@@ -21,6 +21,7 @@ export function formatAndSplitTextIntoColumns(
         [RegExp(`No${dummy}`, "g"), "No. "], // Formats abbreviation for "Number"
         [RegExp(`Prof${dummy}`, "g"), "Prof. "], // Formats abbreviation for "Professor"
         [RegExp(`Eq${dummy}`, "g"), "Eq. "], // Formats abbreviation for "Equation"
+        [RegExp(`eq${dummy}`, "g"), "eq. "], // Formats abbreviation for "Equation"
         [RegExp(`et al${dummy}`, "g"), "et al. "], // Formats "et al."
         [RegExp(`Dr${dummy}`, "g"), "Dr. "], // Formats abbreviation for "Doctor"
         [RegExp(`e\.g${dummy}`, "g"), "e.g. "], // Formats "e.g."
