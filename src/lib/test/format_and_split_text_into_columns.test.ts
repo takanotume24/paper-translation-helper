@@ -62,6 +62,17 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [size. ]', () => {
+        const testString = "The small backpack comes in various colors and sizes. When shopping for clothes, it's essential to consider your body size.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['The small backpack comes in various colors and sizes.'],
+            ["When shopping for clothes, it's essential to consider your body size."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
     // Test for hyphen followed by newline
     it('should remove hyphen followed by newline', () => {
         const testString = "Test-\nString";
