@@ -51,6 +51,16 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [vs. ]', () => {
+        const testString = "In the heated debate of cats vs. dogs, each side presents compelling arguments for their favorite pet. The classic battle of wits vs. strength is often portrayed in heroic tales, where cunning often triumphs over brute force.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['In the heated debate of cats vs. dogs, each side presents compelling arguments for their favorite pet.'],
+            ['The classic battle of wits vs. strength is often portrayed in heroic tales, where cunning often triumphs over brute force.']
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
 
     // Test for hyphen followed by newline
     it('should remove hyphen followed by newline', () => {
