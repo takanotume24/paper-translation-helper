@@ -30,6 +30,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "bootstrap": "^5.3.2",
     "uuid": "^9.0.1"
   }
 }
