@@ -28,6 +28,7 @@ export function formatAndSplitTextIntoColumns(
         [RegExp(`etc${dummy}`, "g"), "etc. "], // Formats "etc."
         [RegExp(`Sec${dummy}`, "g"), "Sec. "], // Formats abbreviation for "Section"
         [RegExp(`Sect${dummy}`, "g"), "Sect. "], // Formats abbreviation for "Section"
+        [RegExp(`Section${dummy}`, "g"), "Section. "], // Formats abbreviation for "Section"
         [RegExp(`2\.4 GHz`, "g"), "2.4GHz"], // Formats specific frequency value
         [RegExp(`I${dummy}`, "g"), "I. "],
         [RegExp(`II${dummy}`, "g"), "II. "],
