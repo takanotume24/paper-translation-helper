@@ -63,11 +63,11 @@ describe('formatAndSplitTextIntoColumns', () => {
     });
 
     it('should process and split text correctly [size. ]', () => {
-        const testString = "The small backpack comes in various colors and sizes. When shopping for clothes, it's essential to consider your body size.";
+        const testString = " When shopping for clothes, it's essential to consider your body size. The small backpack comes in various colors and sizes.";
         const charLimit = 10;
         const expectedResult = [
-            ['The small backpack comes in various colors and sizes.'],
-            ["When shopping for clothes, it's essential to consider your body size."]
+            ["When shopping for clothes, it's essential to consider your body size."],
+            ['The small backpack comes in various colors and sizes.']
         ];
         const result = formatAndSplitTextIntoColumns(testString, charLimit);
         expect(result).toEqual(expectedResult);
