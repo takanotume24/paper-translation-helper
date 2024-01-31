@@ -73,6 +73,28 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [1.5 Hz. ]', () => {
+        const testString = "The gentle waves, oscillating at a frequency of 1.5 Hz, brought a calming rhythm to the serene beach. In the laboratory, we observed that the pendulum's natural frequency settled at 1.5 Hz, demonstrating a consistent pattern in its motion.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['The gentle waves, oscillating at a frequency of 1.5 Hz, brought a calming rhythm to the serene beach.'],
+            ["In the laboratory, we observed that the pendulum's natural frequency settled at 1.5 Hz, demonstrating a consistent pattern in its motion."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
+    it('should process and split text correctly [eq. 2.]', () => {
+        const testString = "As demonstrated in eq. 2., the energy efficiency of this system surpasses that of traditional methods by a significant margin. The relationship between temperature and pressure in this experiment can be accurately described by eq. 2., which aligns with the theoretical predictions.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['As demonstrated in eq. 2., the energy efficiency of this system surpasses that of traditional methods by a significant margin.'],
+            ["The relationship between temperature and pressure in this experiment can be accurately described by eq. 2., which aligns with the theoretical predictions."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
     // Test for hyphen followed by newline
     it('should remove hyphen followed by newline', () => {
         const testString = "Test-\nString";
