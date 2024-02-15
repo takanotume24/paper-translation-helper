@@ -62,6 +62,28 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [size. ]', () => {
+        const testString = "When shopping for clothes, it's essential to consider your body size. The small backpack comes in various colors and sizes.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["When shopping for clothes, it's essential to consider your body size."],
+            ['The small backpack comes in various colors and sizes.']
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
+    it('should process and split text correctly [time. ]', () => {
+        const testString = "All good things must come to an end, time. After this moment passes, we begin anew with lessons learned and memories cherished.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["All good things must come to an end, time."],
+            ['After this moment passes, we begin anew with lessons learned and memories cherished.']
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
     it('should process and split text correctly [1.5 Hz. ]', () => {
         const testString = "The gentle waves, oscillating at a frequency of 1.5 Hz, brought a calming rhythm to the serene beach. In the laboratory, we observed that the pendulum's natural frequency settled at 1.5 Hz, demonstrating a consistent pattern in its motion.";
         const charLimit = 10;
