@@ -1,37 +1,28 @@
+import { add_column_to_columns } from './add_column_to_columns'
+import { get_char_count_of_column } from './get_char_count_of_column'
+
+
 export function splitIntoColumns(
     sentences: string[],
-    charLimit: number,
+    char_limit: number,
 ): string[][] {
-    let charCount = 0;
-    let results: string[][] = [];
-    let currentColumn: string[] = [];
+    let columns: string[][] = [];
+    let current_column: string[] = [];
 
-    sentences.forEach(sentence => {
-        // Check if adding this sentence exceeds charLimit or if the sentence itself exceeds charLimit
-        if (charCount + sentence.length > charLimit || sentence.length > charLimit) {
-            // Push currentColumn to results if it's not empty
-            if (currentColumn.length > 0) {
-                results.push(currentColumn);
-                currentColumn = [];
-            }
-
-            // If the sentence itself exceeds charLimit, it should be in its own column
-            if (sentence.length > charLimit) {
-                results.push([sentence]);
-                // Reset charCount as the long sentence is placed in its own column
-                charCount = 0;
-                return; // Continue to next sentence
-            }
+    for (let sentence of sentences) {
+        const expect_char_count = get_char_count_of_column(current_column) + sentence.length
+        if (expect_char_count > char_limit && current_column.length != 0) {
+            add_column_to_columns(current_column, columns)
+            current_column = []
         }
 
-        currentColumn.push(sentence);
-        charCount += sentence.length;
-    });
-
-    // Push the last column if not empty
-    if (currentColumn.length > 0) {
-        results.push(currentColumn);
+        current_column.push(sentence)
     }
 
-    return results;
+    // Push the last column if not empty
+    if (current_column.length > 0) {
+        columns.push(current_column);
+    }
+
+    return columns;
 }
