@@ -170,5 +170,136 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result.join(' ')).toContain('See pages 10.23-56 for more information');
     });
 
-    // ... (Complete the tests for all the replacement rules) ...
+    it('should process and split text correctly [Jan.]', () => {
+        const testString = "Exciting events start in Jan. as the new year kicks off. City streets are covered in snow in Jan. making it a winter wonderland.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Exciting events start in Jan. as the new year kicks off."],
+            ["City streets are covered in snow in Jan. making it a winter wonderland."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
+    it('should process and split text correctly [Feb.]', () => {
+        const testString = "Valentine's Day in Feb. brings couples closer together. Feb. often feels colder, despite being shorter.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Valentine's Day in Feb. brings couples closer together."],
+            ["Feb. often feels colder, despite being shorter."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Mar.]', () => {
+        const testString = "Mar. marks the beginning of spring, with flowers starting to bloom. The St.Patrick's Day parade in Mar. is a highlight of the month.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Mar. marks the beginning of spring, with flowers starting to bloom."],
+            ["The St.Patrick's Day parade in Mar. is a highlight of the month."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Apr.]', () => {
+        const testString = "April showers in Apr. bring May flowers. Easter often falls in Apr., bringing joy and chocolate eggs.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["April showers in Apr. bring May flowers."],
+            ["Easter often falls in Apr., bringing joy and chocolate eggs."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [May.]', () => {
+        const testString = "Warm weather and outdoor activities return in May. making it a beloved time of year. Mother's Day, celebrated in May. is a special occasion for families.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Warm weather and outdoor activities return in May. making it a beloved time of year."],
+            ["Mother's Day, celebrated in May. is a special occasion for families."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Jun.]', () => {
+        const testString = "Jun. is the start of summer vacation for many students. Longer days in Jun. mean more time for fun in the sun.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Jun. is the start of summer vacation for many students."],
+            ["Longer days in Jun. mean more time for fun in the sun."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Jul.]', () => {
+        const testString = "Jul. is famous for Independence Day fireworks and celebrations. The heat in Jul. encourages trips to the beach or pool.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Jul. is famous for Independence Day fireworks and celebrations."],
+            ["The heat in Jul. encourages trips to the beach or pool."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Aug.]', () => {
+        const testString = "Aug. is the peak of summer, perfect for barbecues and outdoor festivals. Many families take their vacations in Aug. to enjoy the summer break.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Aug. is the peak of summer, perfect for barbecues and outdoor festivals."],
+            ["Many families take their vacations in Aug. to enjoy the summer break."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Sep.]', () => {
+        const testString = "Sep. brings the start of the autumn season and cooler temperatures. Schools reopen in Sep., marking the end of summer break.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Sep. brings the start of the autumn season and cooler temperatures."],
+            ["Schools reopen in Sep., marking the end of summer break."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Oct.]', () => {
+        const testString = "Halloween in Oct. is a time for costumes, candy, and spooky fun. The leaves turn beautiful colors in Oct., signaling the heart of fall.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Halloween in Oct. is a time for costumes, candy, and spooky fun."],
+            ["The leaves turn beautiful colors in Oct., signaling the heart of fall."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Nov.]', () => {
+        const testString = "Thanksgiving in Nov. brings families together for a feast. The weather in Nov. becomes chillier, preparing us for winter.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Thanksgiving in Nov. brings families together for a feast."],
+            ["The weather in Nov. becomes chillier, preparing us for winter."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
+    it('should process and split text correctly [Dec.]', () => {
+        const testString = "Dec. is filled with holiday cheer and festive decorations. The year ends with celebrations and reflections in Dec.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["Dec. is filled with holiday cheer and festive decorations."],
+            ["The year ends with celebrations and reflections in Dec."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+    
 });

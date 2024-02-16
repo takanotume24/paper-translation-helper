@@ -43,6 +43,18 @@ export function formatAndSplitTextIntoColumns(
         [RegExp(String.raw`VIII${dummy}`, "g"), "VIII. "],
         [RegExp(String.raw`IX${dummy}`, "g"), "IX. "],
         [RegExp(String.raw`X${dummy}`, "g"), "X. "],
+        [RegExp(String.raw`Jan${dummy}`, "g"), "Jan. "],
+        [RegExp(String.raw`Feb${dummy}`, "g"), "Feb. "],
+        [RegExp(String.raw`Mar${dummy}`, "g"), "Mar. "],
+        [RegExp(String.raw`Apr${dummy}`, "g"), "Apr. "],
+        [RegExp(String.raw`May${dummy}`, "g"), "May. "],
+        [RegExp(String.raw`Jun${dummy}`, "g"), "Jun. "],
+        [RegExp(String.raw`Jul${dummy}`, "g"), "Jul. "],
+        [RegExp(String.raw`Aug${dummy}`, "g"), "Aug. "],
+        [RegExp(String.raw`Sep${dummy}`, "g"), "Sep. "],
+        [RegExp(String.raw`Oct${dummy}`, "g"), "Oct. "],
+        [RegExp(String.raw`Nov${dummy}`, "g"), "Nov. "],
+        [RegExp(String.raw`Dec${dummy}`, "g"), "Dec. "],
         [/\.\d+,\d+(?= [A-Z])/g, match => "[" + match + "]. "], // Formats numbers with commas
         [/\.\d+-\d+(?= [A-Z])/g, match => "[" + match + "]. "], // Formats number ranges
     ];
