@@ -51,6 +51,17 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
 
+    it('should process and split text correctly [Table. ]', () => {
+        const testString = "In our analysis, we found significant discrepancies in the data; Table. 3 of the report details these findings and their implications for the project. The implementation plan is divided into several phases, as outlined in the document; Table. 4 specifically discusses the initial deployment strategy and resource allocation.";
+        const charLimit = 10;
+        const expectedResult = [
+            ['In our analysis, we found significant discrepancies in the data; Table. 3 of the report details these findings and their implications for the project.'],
+            ['The implementation plan is divided into several phases, as outlined in the document; Table. 4 specifically discusses the initial deployment strategy and resource allocation.']
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
     it('should process and split text correctly [vs. ]', () => {
         const testString = "In the heated debate of cats vs. dogs, each side presents compelling arguments for their favorite pet. The classic battle of wits vs. strength is often portrayed in heroic tales, where cunning often triumphs over brute force.";
         const charLimit = 10;

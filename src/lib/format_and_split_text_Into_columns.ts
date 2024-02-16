@@ -18,6 +18,7 @@ export function formatAndSplitTextIntoColumns(
         [/- /g, ""], // Removes hyphens followed by a space
         [RegExp(String.raw`Fig${dummy}`, "g"), "Fig. "], // Formats abbreviation for "Figure"
         [RegExp(String.raw`Figs${dummy}`, "g"), "Figs. "], // Formats abbreviation for "Figures"
+        [RegExp(String.raw`Table${dummy}`, "g"), "Table. "], // Formats abbreviation for "Table"
         [RegExp(String.raw`No${dummy}`, "g"), "No. "], // Formats abbreviation for "Number"
         [RegExp(String.raw`Prof${dummy}`, "g"), "Prof. "], // Formats abbreviation for "Professor"
         [RegExp(String.raw`Eq${dummy}`, "g"), "Eq. "], // Formats abbreviation for "Equation"
