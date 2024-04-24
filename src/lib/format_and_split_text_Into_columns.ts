@@ -32,6 +32,7 @@ export function formatAndSplitTextIntoColumns(
         [RegExp(String.raw`Sect${dummy}`, "g"), "Sect. "], // Formats abbreviation for "Section"
         [RegExp(String.raw`Section${dummy}`, "g"), "Section. "], // Formats abbreviation for "Section"
         [RegExp(String.raw`vs${dummy}`, "g"), "vs. "], // Formats abbreviation for "vs."
+        [RegExp(String.raw`cf${dummy}`, "g"), "cf. "], // Formats abbreviation for "cf."
         [RegExp(String.raw`2\.4 GHz`, "g"), "2.4GHz"], // Formats specific frequency value
         [RegExp(String.raw`I${dummy}`, "g"), "I. "],
         [RegExp(String.raw`II${dummy}`, "g"), "II. "],

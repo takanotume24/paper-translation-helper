@@ -302,4 +302,15 @@ describe('formatAndSplitTextIntoColumns', () => {
         expect(result).toEqual(expectedResult);
     });
     
+    it('should process and split text correctly [cf.]', () => {
+        const testString = "The theory of evolution by natural selection has been widely accepted by scientists since its introduction by Charles Darwin, cf. his book \"On the Origin of Species\". Many psychologists suggest that early childhood experiences have a significant impact on adult behavior, cf. the works of Sigmund Freud on psychoanalysis.";
+        const charLimit = 10;
+        const expectedResult = [
+            ["The theory of evolution by natural selection has been widely accepted by scientists since its introduction by Charles Darwin, cf. his book \"On the Origin of Species\"."],
+            ["Many psychologists suggest that early childhood experiences have a significant impact on adult behavior, cf. the works of Sigmund Freud on psychoanalysis."]
+        ];
+        const result = formatAndSplitTextIntoColumns(testString, charLimit);
+        expect(result).toEqual(expectedResult);
+    });
+
 });
