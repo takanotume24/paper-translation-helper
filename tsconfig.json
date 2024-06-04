@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "newLine": "LF",
-    "outDir": "./lib/",
-    "target": "es5",
+    "strict": true,
+    "jsx": "preserve",
     "sourceMap": true,
     "declaration": true,
-    "jsx": "preserve",
+    "outDir": "./lib/",
     "lib": [
-      "es2017",
+      "esnext",
       "dom"
     ],
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -22,7 +21,7 @@
     "src/**/*"
   ],
   "exclude": [
-    ".git",
-    "node_modules"
+    "node_modules",
+    "lib"
   ]
 }
