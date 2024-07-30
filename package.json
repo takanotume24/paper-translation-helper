@@ -27,7 +27,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.2.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "minimist": "^1.2.8",
     "json5": "^2.2.3",
     "qs": "^6.12.3",
