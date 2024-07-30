@@ -35,7 +35,7 @@
     "minimatch": "^10.0.1",
     "async": "^3.2.5",
     "vite": "^5.3.4",
-    "@vitejs/plugin-vue": "^5.0.5"
+    "@vitejs/plugin-vue": "^5.1.1"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
