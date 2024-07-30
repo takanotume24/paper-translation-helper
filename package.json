@@ -25,9 +25,9 @@
     "gh-pages": "^6.1.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "ts-jest": "^29.2.2",
+    "ts-jest": "^29.2.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "minimist": "^1.2.8",
     "json5": "^2.2.3",
     "qs": "^6.12.3",
@@ -35,7 +35,7 @@
     "minimatch": "^10.0.1",
     "async": "^3.2.5",
     "vite": "^5.3.5",
-    "@vitejs/plugin-vue": "^5.0.5"
+    "@vitejs/plugin-vue": "^5.1.1"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
