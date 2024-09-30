@@ -34,7 +34,7 @@
     "decode-uri-component": "^0.4.1",
     "minimatch": "^10.0.1",
     "async": "^3.2.6",
-    "vite": "^5.4.6",
+    "vite": "^5.4.8",
     "@vitejs/plugin-vue": "^5.1.4"
   },
   "dependencies": {
