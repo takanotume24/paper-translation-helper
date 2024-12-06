@@ -31,6 +31,7 @@
                 </div>
             </nav>
         </header>
+
         <main class="container mt-4">
             <div class="form-group">
                 <label for="original">Input / 入力</label>
@@ -39,7 +40,14 @@
             </div>
             <div class="list-group mt-3">
                 <label class="list-group-item">Output / 出力</label>
-                <ul v-html="outputHtml"></ul>
+                <ul class="list-group">
+                    <li v-for="(column, index) in outputColumns" :key="index" class="list-group-item">
+                        <label :for="'text_area_' + index">
+                            No.{{ index }}, Number of characters: {{ column.join("").length }}
+                        </label>
+                        <textarea class="form-control" :id="'text_area_' + index" readonly>{{ column.join("\n") }}</textarea>
+                    </li>
+                </ul>
             </div>
             <div class="input-group mb-3 mt-3">
                 <div class="input-group-prepend">
@@ -55,7 +63,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { formatAndSplitTextIntoColumns } from './lib/format_and_split_text_into_columns';
-import { createHtmlForColumns } from './lib/create_html_for_columns';
 
 export default defineComponent({
     data() {
@@ -65,16 +72,11 @@ export default defineComponent({
         };
     },
     computed: {
-        outputHtml(): string {
-            if (!this.originalText) return '';
+        outputColumns(): string[][] {
+            if (!this.originalText) return [];
 
-            const convertedText = formatAndSplitTextIntoColumns(this.originalText, this.charLimit);
-            return createHtmlForColumns(convertedText);
+            return formatAndSplitTextIntoColumns(this.originalText, this.charLimit);
         }
     }
 });
 </script>
-
-<style scoped>
-/* スタイルを追加する場合ここに記述できます */
-</style>
