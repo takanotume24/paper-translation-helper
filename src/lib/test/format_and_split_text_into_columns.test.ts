@@ -1,5 +1,5 @@
 
-import { formatAndSplitTextIntoColumns } from "../format_and_split_text_Into_columns"
+import { formatAndSplitTextIntoColumns } from "../format_and_split_text_into_columns"
 
 
 describe('formatAndSplitTextIntoColumns', () => {

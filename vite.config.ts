@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
-  plugins: [vue()],
-  base: '/paper-translation-helper/',
+  plugins: [vue(), vueDevTools()],
   build: {
-    outDir: 'dist',
+    outDir: "dist",
   },
 });
