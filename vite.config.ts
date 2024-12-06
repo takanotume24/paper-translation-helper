@@ -4,6 +4,7 @@ import vueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
+  base: '/paper-translation-helper/',
   build: {
     outDir: "dist",
   },
