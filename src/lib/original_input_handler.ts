@@ -1,4 +1,4 @@
-import {formatAndSplitTextIntoColumns} from './format_and_split_text_Into_columns'
+import {formatAndSplitTextIntoColumns} from './format_and_split_text_into_columns'
 import {createHtmlForColumns} from './create_html_for_columns'
 
 export class OriginalInputHandler {
