@@ -14,7 +14,7 @@
     "@types/bootstrap": "^5.2.10",
     "@types/jest": "^29.5.14",
     "@types/uuid": "^10.0.0",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.2.2",
     "async": "^3.2.6",
     "cross-env": "^7.0.3",
     "decode-uri-component": "^0.4.1",
