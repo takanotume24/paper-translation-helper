@@ -29,6 +29,9 @@ jobs:
           npm run test
 
   build:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     needs: test
 
