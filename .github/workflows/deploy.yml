@@ -1,7 +1,4 @@
 name: Deploy
-permissions:
-  contents: read
-  pull-requests: write
 
 on:
   push:
@@ -11,6 +8,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -54,6 +54,11 @@ jobs:
           path: ./dist
 
   deploy:
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+      pages: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
