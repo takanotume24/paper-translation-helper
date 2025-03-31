@@ -28,7 +28,7 @@
     "ts-jest": "^29.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
-    "vite": "^6.2.3",
+    "vite": "^6.2.4",
     "vite-plugin-vue-devtools": "^7.7.2"
   },
   "dependencies": {
