@@ -7,7 +7,6 @@ on:
   push:
   pull_request:
 
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -41,4 +40,4 @@ jobs:
 
       - name: Build Project
         run: |
-          deno bundle src/index.ts dist/bundle.js
+          deno task build

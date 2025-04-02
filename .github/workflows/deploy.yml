@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Project
         run: |
-          deno bundle src/index.ts dist/bundle.js
+          deno task build
 
       - name: Upload static files as artifact
         id: deployment
