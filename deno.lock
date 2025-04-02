@@ -355,7 +355,8 @@
     "https://deno.land/std@0.110.0/uuid/mod.ts": "a62f50c4fd31da2454864fe75c21147dbd70d057791d9c1eef6c80387c5fa579",
     "https://deno.land/std@0.110.0/uuid/v1.ts": "3b242479ab2da5a6f5cdbbfeaa5db7a31966e688237f372ff50e489b93a9be07",
     "https://deno.land/std@0.110.0/uuid/v4.ts": "47f37a826620054272ea7be0ec6ab7ed0cf7b7c120f8b6bd8ac2d3c7deadeb4c",
-    "https://deno.land/std@0.110.0/uuid/v5.ts": "627068cdfae94077cdc68a03018add8f9e4103904cdc0914f81b59f4e67b0530"
+    "https://deno.land/std@0.110.0/uuid/v5.ts": "627068cdfae94077cdc68a03018add8f9e4103904cdc0914f81b59f4e67b0530",
+    "https://esm.sh/vue@3.5.13": "3bdd74ed7c956d5a5066af171b36e6834035425fe92d14719eb543f39e98e898"
   },
   "workspace": {
     "dependencies": [

@@ -9,7 +9,7 @@ export function formatAndSplitTextIntoColumns(
         return [[""]]
     }
 
-    const dummy = v4.generate();
+    const dummy = v4();
     text = text.replace(/\. /g, dummy)
 
     const replacements: [RegExp, string | ((substring: string) => string)][] = [
