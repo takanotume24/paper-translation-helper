@@ -1,6 +1,4 @@
 import { splitIntoColumns } from './split_into_columns.ts';
-import { v4 } from "https://deno.land/std@0.110.0/uuid/mod.ts";
-
 export function formatAndSplitTextIntoColumns(
     text: string,
     charLimit: number,
@@ -9,7 +7,7 @@ export function formatAndSplitTextIntoColumns(
         return [[""]]
     }
 
-    const dummy = v4();
+    const dummy = globalThis.crypto.randomUUID();
     text = text.replace(/\. /g, dummy)
 
     const replacements: [RegExp, string | ((substring: string) => string)][] = [
