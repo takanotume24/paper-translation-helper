@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "npm:vite@^6.2.4";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "npm:vite-plugin-vue-devtools";
 
