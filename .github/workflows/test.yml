@@ -7,7 +7,6 @@ on:
   push:
   pull_request:
 
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,18 +14,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
         with:
-          node-version-file: ".nvmrc"
+          deno-version: v2.x
 
-      - name: install dependencies
-        run: |
-          npm install
+      - name: Run Lint
+        run: deno lint
 
-      - name: run test
+      - name: Run Tests
         run: |
-          npm run test
+          deno test
 
   build:
     runs-on: ubuntu-latest
@@ -35,18 +33,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
         with:
-          node-version-file: ".nvmrc"
+          deno-version: v2.x
 
-      - name: install dependencies
+      - name: Build Project
         run: |
-          npm install
-
-      - name: build
-        run: |
-          npm run build
-
-
-
+          deno task build

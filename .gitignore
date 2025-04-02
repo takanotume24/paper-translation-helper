@@ -171,3 +171,4 @@ crashlytics-build.properties
 /.cache/
 /dist/
 diff.txt
+.vite/

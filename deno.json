@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "vue": "npm:vue@^3.5.13",
+    "bootstrap": "npm:bootstrap@^5.3.3",
+    "@vitejs/plugin-vue": "npm:@vitejs/plugin-vue@^5.2.3"
+  },
+  "tasks": {
+    "dev": "deno run -A --node-modules-dir npm:vite",
+    "build": "deno run -A --node-modules-dir npm:vite build",
+    "preview": "deno run -A --node-modules-dir npm:vite preview",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.157.0/http/file_server.ts dist/"
+  }
+}

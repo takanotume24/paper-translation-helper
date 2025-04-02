@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 import { formatAndSplitTextIntoColumns } from './lib/format_and_split_text_into_columns';
 
 export default defineComponent({

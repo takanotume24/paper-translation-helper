@@ -1,6 +1,4 @@
-import { splitIntoColumns } from './split_into_columns'
-import { v4 as uuidv4 } from 'uuid';
-
+import { splitIntoColumns } from './split_into_columns.ts';
 export function formatAndSplitTextIntoColumns(
     text: string,
     charLimit: number,
@@ -9,7 +7,7 @@ export function formatAndSplitTextIntoColumns(
         return [[""]]
     }
 
-    const dummy = uuidv4()
+    const dummy = globalThis.crypto.randomUUID();
     text = text.replace(/\. /g, dummy)
 
     const replacements: [RegExp, string | ((substring: string) => string)][] = [
