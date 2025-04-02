@@ -5,4 +5,5 @@
         "nvmrc",
         "uuidv"
     ],
+    "deno.enable": true,
 }
