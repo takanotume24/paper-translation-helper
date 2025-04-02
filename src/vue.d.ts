@@ -1,3 +1,3 @@
-declare module "https://unpkg.com/vue@3.5.13/dist/vue.esm-browser.js" {
+declare module "https://esm.sh/vue@3.5.13" {
   export * from "vue";
 }
