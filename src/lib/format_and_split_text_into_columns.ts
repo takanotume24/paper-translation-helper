@@ -1,5 +1,5 @@
-import { splitIntoColumns } from './split_into_columns'
-import { v4 as uuidv4 } from 'uuid';
+import { splitIntoColumns } from './split_into_columns.ts';
+import { v4 } from "https://deno.land/std@0.110.0/uuid/mod.ts";
 
 export function formatAndSplitTextIntoColumns(
     text: string,
@@ -9,7 +9,7 @@ export function formatAndSplitTextIntoColumns(
         return [[""]]
     }
 
-    const dummy = uuidv4()
+    const dummy = v4.generate();
     text = text.replace(/\. /g, dummy)
 
     const replacements: [RegExp, string | ((substring: string) => string)][] = [

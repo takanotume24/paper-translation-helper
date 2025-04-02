@@ -1,5 +1,5 @@
-import { add_column_to_columns } from './add_column_to_columns'
-import { get_char_count_of_column } from './get_char_count_of_column'
+import { add_column_to_columns } from './add_column_to_columns.ts';
+import { get_char_count_of_column } from './get_char_count_of_column.ts';
 
 
 export function splitIntoColumns(

@@ -1,4 +1,4 @@
-import { Type } from "../type/type"
+import { Type } from "../type/type.ts";
 
 export module Helper {
     export function delete_last_period(arr: Type.columns): Type.columns {
