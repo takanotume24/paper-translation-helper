@@ -20,6 +20,9 @@ jobs:
         with:
           deno-version: v1.x
 
+      - name: Run Lint
+        run: deno lint
+
       - name: Run Tests
         run: |
           deno test --unstable --allow-read --allow-net

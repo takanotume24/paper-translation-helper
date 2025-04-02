@@ -6,10 +6,10 @@ export function splitIntoColumns(
     sentences: string[],
     char_limit: number,
 ): string[][] {
-    let columns: string[][] = [];
+    const columns: string[][] = [];
     let current_column: string[] = [];
 
-    for (let sentence of sentences) {
+    for (const sentence of sentences) {
         const expect_char_count = get_char_count_of_column(current_column) + sentence.length
         if (expect_char_count > char_limit && current_column.length != 0) {
             add_column_to_columns(current_column, columns)

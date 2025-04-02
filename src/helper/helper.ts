@@ -1,7 +1,6 @@
-import { Type } from "../type/type.ts";
+import { columns } from "../type/type.ts";
 
-export module Helper {
-    export function delete_last_period(arr: Type.columns): Type.columns {
+export function delete_last_period(arr: columns): columns {
         const last_arr = arr.pop()
         if (!last_arr) {
             return arr
@@ -22,7 +21,7 @@ export module Helper {
         return arr
     }
 
-    export function delete_last_empty_string(arr: Type.columns): Type.columns {
+export function delete_last_empty_string(arr: columns): columns {
         const last_arr = arr.pop()
         if (!last_arr) {
             return arr
@@ -45,5 +44,4 @@ export module Helper {
             arr.push(last_arr)
             return arr
         }
-    }
 }
