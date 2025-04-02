@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          deno test --unstable --allow-read --allow-net
+          deno test
 
   build:
     permissions:
