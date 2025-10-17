@@ -1,8 +1,8 @@
 {
   "imports": {
-    "vue": "npm:vue",
-    "bootstrap": "npm:bootstrap",
-    "@vitejs/plugin-vue": "npm:@vitejs/plugin-vue"
+    "vue": "npm:vue@3.5.22",
+    "bootstrap": "npm:bootstrap@5.3.8",
+    "@vitejs/plugin-vue": "npm:@vitejs/plugin-vue@6.0.1"
   },
   "tasks": {
     "dev": "deno run -A --node-modules-dir npm:vite",
