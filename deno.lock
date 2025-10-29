@@ -6,6 +6,7 @@
     "npm:bootstrap@5.3.8": "5.3.8_@popperjs+core@2.11.8",
     "npm:bootstrap@^5.3.8": "5.3.8_@popperjs+core@2.11.8",
     "npm:vite-plugin-vue-devtools@*": "7.7.7_vite@7.1.10__picomatch@4.0.3_vue@3.5.22",
+    "npm:vite-plugin-vue-devtools@^8.0.3": "8.0.3_vite@7.1.10__picomatch@4.0.3_vue@3.5.22",
     "npm:vite@*": "7.1.10_picomatch@4.0.3",
     "npm:vite@^7.1.10": "7.1.10_picomatch@4.0.3",
     "npm:vue@3.5.22": "3.5.22",
@@ -615,8 +616,20 @@
     "@vue/devtools-core@7.7.7_vue@3.5.22_vite@7.1.10__picomatch@4.0.3": {
       "integrity": "sha512-9z9TLbfC+AjAi1PQyWX+OErjIaJmdFlbDHcD+cAMYKY6Bh5VlsAtCeGyRMrXwIlMEQPukvnWt3gZBLwTAIMKzQ==",
       "dependencies": [
-        "@vue/devtools-kit",
-        "@vue/devtools-shared",
+        "@vue/devtools-kit@7.7.7",
+        "@vue/devtools-shared@7.7.7",
+        "mitt",
+        "nanoid@5.1.6",
+        "pathe",
+        "vite-hot-client",
+        "vue"
+      ]
+    },
+    "@vue/devtools-core@8.0.3_vue@3.5.22_vite@7.1.10__picomatch@4.0.3": {
+      "integrity": "sha512-gCEQN7aMmeaigEWJQ2Z2o3g7/CMqGTPvNS1U3n/kzpLoAZ1hkAHNgi4ml/POn/9uqGILBk65GGOUdrraHXRj5Q==",
+      "dependencies": [
+        "@vue/devtools-kit@8.0.3",
+        "@vue/devtools-shared@8.0.3",
         "mitt",
         "nanoid@5.1.6",
         "pathe",
@@ -627,17 +640,35 @@
     "@vue/devtools-kit@7.7.7": {
       "integrity": "sha512-wgoZtxcTta65cnZ1Q6MbAfePVFxfM+gq0saaeytoph7nEa7yMXoi6sCPy4ufO111B9msnw0VOWjPEFCXuAKRHA==",
       "dependencies": [
-        "@vue/devtools-shared",
-        "birpc",
+        "@vue/devtools-shared@7.7.7",
+        "birpc@2.4.0",
         "hookable",
         "mitt",
-        "perfect-debounce",
+        "perfect-debounce@1.0.0",
+        "speakingurl",
+        "superjson"
+      ]
+    },
+    "@vue/devtools-kit@8.0.3": {
+      "integrity": "sha512-UF4YUOVGdfzXLCv5pMg2DxocB8dvXz278fpgEE+nJ/DRALQGAva7sj9ton0VWZ9hmXw+SV8yKMrxP2MpMhq9Wg==",
+      "dependencies": [
+        "@vue/devtools-shared@8.0.3",
+        "birpc@2.6.1",
+        "hookable",
+        "mitt",
+        "perfect-debounce@2.0.0",
         "speakingurl",
         "superjson"
       ]
     },
     "@vue/devtools-shared@7.7.7": {
       "integrity": "sha512-+udSj47aRl5aKb0memBvcUG9koarqnxNM5yjuREvqwK6T3ap4mn3Zqqc17QrBFTqSMjr3HK1cvStEZpMDpfdyw==",
+      "dependencies": [
+        "rfdc"
+      ]
+    },
+    "@vue/devtools-shared@8.0.3": {
+      "integrity": "sha512-s/QNll7TlpbADFZrPVsaUNPCOF8NvQgtgmmB7Tip6pLf/HcOvBTly0lfLQ0Eylu9FQ4OqBhFpLyBgwykiSf8zw==",
       "dependencies": [
         "rfdc"
       ]
@@ -675,8 +706,14 @@
     "@vue/shared@3.5.22": {
       "integrity": "sha512-F4yc6palwq3TT0u+FYf0Ns4Tfl9GRFURDN2gWG7L1ecIaS/4fCIuFOjMTnCyjsu/OK6vaDKLCrGAa+KvvH+h4w=="
     },
+    "ansis@4.2.0": {
+      "integrity": "sha512-HqZ5rWlFjGiV0tDm3UxxgNRqsOTniqoKZu0pIAfh7TZQMGuZK+hH0drySty0si0QXj1ieop4+SkSfPZBPPkHig=="
+    },
     "birpc@2.4.0": {
       "integrity": "sha512-5IdNxTyhXHv2UlgnPHQ0h+5ypVmkrYHzL8QT+DwFZ//2N/oNV8Ch+BCRmTJ3x6/z9Axo/cXYBc9eprsUVK/Jsg=="
+    },
+    "birpc@2.6.1": {
+      "integrity": "sha512-LPnFhlDpdSH6FJhJyn4M0kFO7vtQ5iPw24FnG0y21q09xC7e8+1LeR31S1MAIrDAHp4m7aas4bEkTDTvMAtebQ=="
     },
     "bootstrap@5.3.8_@popperjs+core@2.11.8": {
       "integrity": "sha512-HP1SZDqaLDPwsNiqRqi5NcP0SSXciX2s9E+RyqJIIqGo+vJeN5AJVM98CXmW/Wux0nQ5L7jeWUdplCEf0Ee+tg==",
@@ -750,6 +787,9 @@
     },
     "error-stack-parser-es@0.1.5": {
       "integrity": "sha512-xHku1X40RO+fO8yJ8Wh2f2rZWVjqyhb1zgq1yZ8aZRQkv6OOKhKWRUaht3eSCUbAOBaKIgM+ykwFLE+QUxgGeg=="
+    },
+    "error-stack-parser-es@1.0.5": {
+      "integrity": "sha512-5qucVt2XcuGMcEGgWI7i+yZpmpByQ8J1lHhcL7PwqCwu9FPP3VUXzT4ltHe5i2z9dePwEHcDVOAfSnHsOlCXRA=="
     },
     "esbuild@0.25.11": {
       "integrity": "sha512-KohQwyzrKTQmhXDW1PjCv3Tyspn9n5GcY2RTDqeORIdIJY8yKIF7sTSopFmn/wpMPW4rdPXI0UE5LJLuq3bx0Q==",
@@ -948,6 +988,9 @@
         "unicorn-magic"
       ]
     },
+    "ohash@2.0.11": {
+      "integrity": "sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ=="
+    },
     "open@10.1.2": {
       "integrity": "sha512-cxN6aIDPz6rm8hbebcP7vrQNhvRcveZoJU72Y7vskh4oIm+BZwBECnx5nTmrlres1Qapvx27Qo1Auukpf8PKXw==",
       "dependencies": [
@@ -955,6 +998,15 @@
         "define-lazy-prop",
         "is-inside-container",
         "is-wsl"
+      ]
+    },
+    "open@10.2.0": {
+      "integrity": "sha512-YgBpdJHPyQ2UE5x+hlSXcnejzAvD0b22U2OuAP+8OnlJT+PjWPxtgmGqKKc+RgTM63U9gN0YzrYc71R2WT/hTA==",
+      "dependencies": [
+        "default-browser",
+        "define-lazy-prop",
+        "is-inside-container",
+        "wsl-utils"
       ]
     },
     "parse-ms@4.0.0": {
@@ -971,6 +1023,9 @@
     },
     "perfect-debounce@1.0.0": {
       "integrity": "sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA=="
+    },
+    "perfect-debounce@2.0.0": {
+      "integrity": "sha512-fkEH/OBiKrqqI/yIgjR92lMfs2K8105zt/VT6+7eTjNwisrsh47CeIED9z58zI7DfKdH3uHAn25ziRZn3kgAow=="
     },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
@@ -1054,6 +1109,14 @@
         "totalist"
       ]
     },
+    "sirv@3.0.2": {
+      "integrity": "sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==",
+      "dependencies": [
+        "@polka/url",
+        "mrmime",
+        "totalist"
+      ]
+    },
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
     },
@@ -1085,6 +1148,13 @@
     "universalify@2.0.1": {
       "integrity": "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="
     },
+    "unplugin-utils@0.3.1": {
+      "integrity": "sha512-5lWVjgi6vuHhJ526bI4nlCOmkCIF3nnfXkCMDeMJrtdvxTs6ZFCM8oNufGTsDbKv/tJ/xj8RpvXjRuPBZJuJog==",
+      "dependencies": [
+        "pathe",
+        "picomatch"
+      ]
+    },
     "update-browserslist-db@1.1.3_browserslist@4.25.1": {
       "integrity": "sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==",
       "dependencies": [
@@ -1093,6 +1163,14 @@
         "picocolors"
       ],
       "bin": true
+    },
+    "vite-dev-rpc@1.1.0_vite@7.1.10__picomatch@4.0.3": {
+      "integrity": "sha512-pKXZlgoXGoE8sEKiKJSng4hI1sQ4wi5YT24FCrwrLt6opmkjlqPPVmiPWWJn8M8byMxRGzp1CrFuqQs4M/Z39A==",
+      "dependencies": [
+        "birpc@2.6.1",
+        "vite",
+        "vite-hot-client"
+      ]
     },
     "vite-hot-client@2.1.0_vite@7.1.10__picomatch@4.0.3": {
       "integrity": "sha512-7SpgZmU7R+dDnSmvXE1mfDtnHLHQSisdySVR7lO8ceAXvM0otZeuQQ6C8LrS5d/aYyP/QZ0hI0L+dIPrm4YlFQ==",
@@ -1106,25 +1184,52 @@
         "@antfu/utils",
         "@rollup/pluginutils",
         "debug",
-        "error-stack-parser-es",
+        "error-stack-parser-es@0.1.5",
         "fs-extra",
-        "open",
-        "perfect-debounce",
+        "open@10.1.2",
+        "perfect-debounce@1.0.0",
         "picocolors",
-        "sirv",
+        "sirv@3.0.1",
         "vite"
+      ]
+    },
+    "vite-plugin-inspect@11.3.3_vite@7.1.10__picomatch@4.0.3": {
+      "integrity": "sha512-u2eV5La99oHoYPHE6UvbwgEqKKOQGz86wMg40CCosP6q8BkB6e5xPneZfYagK4ojPJSj5anHCrnvC20DpwVdRA==",
+      "dependencies": [
+        "ansis",
+        "debug",
+        "error-stack-parser-es@1.0.5",
+        "ohash",
+        "open@10.2.0",
+        "perfect-debounce@2.0.0",
+        "sirv@3.0.2",
+        "unplugin-utils",
+        "vite",
+        "vite-dev-rpc"
       ]
     },
     "vite-plugin-vue-devtools@7.7.7_vite@7.1.10__picomatch@4.0.3_vue@3.5.22": {
       "integrity": "sha512-d0fIh3wRcgSlr4Vz7bAk4va1MkdqhQgj9ANE/rBhsAjOnRfTLs2ocjFMvSUOsv6SRRXU9G+VM7yMgqDb6yI4iQ==",
       "dependencies": [
-        "@vue/devtools-core",
-        "@vue/devtools-kit",
-        "@vue/devtools-shared",
+        "@vue/devtools-core@7.7.7_vue@3.5.22_vite@7.1.10__picomatch@4.0.3",
+        "@vue/devtools-kit@7.7.7",
+        "@vue/devtools-shared@7.7.7",
         "execa",
-        "sirv",
+        "sirv@3.0.1",
         "vite",
-        "vite-plugin-inspect",
+        "vite-plugin-inspect@0.8.9_vite@7.1.10__picomatch@4.0.3",
+        "vite-plugin-vue-inspector"
+      ]
+    },
+    "vite-plugin-vue-devtools@8.0.3_vite@7.1.10__picomatch@4.0.3_vue@3.5.22": {
+      "integrity": "sha512-yIi3u31xUi28HcLlTpV0BvSLQHgZ2dA8Zqa59kWfIeMdHqbsunt6TCjq4wCNfOcGSju+E7qyHyI09EjRRFMbuQ==",
+      "dependencies": [
+        "@vue/devtools-core@8.0.3_vue@3.5.22_vite@7.1.10__picomatch@4.0.3",
+        "@vue/devtools-kit@8.0.3",
+        "@vue/devtools-shared@8.0.3",
+        "sirv@3.0.2",
+        "vite",
+        "vite-plugin-inspect@11.3.3_vite@7.1.10__picomatch@4.0.3",
         "vite-plugin-vue-inspector"
       ]
     },
@@ -1175,6 +1280,12 @@
       ],
       "bin": true
     },
+    "wsl-utils@0.1.0": {
+      "integrity": "sha512-h3Fbisa2nKGPxCpm89Hk33lBLsnaGBvctQopaBSOW/uIs6FTe1ATyAnKFJrzVs9vpGdsTe73WF3V4lIsk4Gacw==",
+      "dependencies": [
+        "is-wsl"
+      ]
+    },
     "yallist@3.1.1": {
       "integrity": "sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g=="
     },
@@ -1192,6 +1303,7 @@
       "dependencies": [
         "npm:@vitejs/plugin-vue@^6.0.1",
         "npm:bootstrap@^5.3.8",
+        "npm:vite-plugin-vue-devtools@^8.0.3",
         "npm:vite@^7.1.10",
         "npm:vue@^3.5.22"
       ]
