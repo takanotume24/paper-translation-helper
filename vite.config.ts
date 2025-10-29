@@ -1,6 +1,6 @@
-import { defineConfig } from "npm:vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import vueDevTools from "npm:vite-plugin-vue-devtools";
+import vueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
