@@ -52,6 +52,10 @@ def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
     preceded by a non-alphanumeric/non-underscore character. This provides
     consistency with the \\bFunction\\() regex pattern used for text matching.
     
+    Note: For non-ASCII bytes (>= 128), we conservatively treat them as word
+    boundaries. This is appropriate for binary files where we're looking for
+    ASCII patterns like "Function(" and want to avoid false negatives.
+    
     Japanese: バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
     単語境界とは、パターンの前が非英数字/アンダースコア、または文字列の先頭であること。
     """
@@ -68,7 +72,8 @@ def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
             if not (prev_char.isalnum() or prev_char == '_'):
                 return True
         else:
-            # Non-ASCII bytes are considered word boundaries for our purposes
+            # Non-ASCII bytes are conservatively treated as word boundaries
+            # This is appropriate for binary files with ASCII patterns
             return True
         # Search for next occurrence
         index = content.find(pattern, index + 1)
@@ -96,6 +101,7 @@ def find_dangerous_patterns(root_dir: str) -> List[Tuple[str, Optional[int], str
                 try:
                     with open(path, "rb") as bf:
                         content = bf.read()
+                        # Pattern matching with word boundary consideration
                         # 単語境界を考慮したパターンマッチング
                         if (
                             b"eval(" in content
