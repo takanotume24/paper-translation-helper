@@ -46,11 +46,11 @@ def find_inline_tags_in_index(
 
 
 def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
-    """Check if pattern appears with word boundary in binary content.
+    r"""Check if pattern appears with word boundary in binary content.
     
     A word boundary means the pattern is either at the start of content or
     preceded by a non-alphanumeric/non-underscore character. This provides
-    consistency with the \\bFunction\\() regex pattern used for text matching.
+    consistency with the \bFunction\() regex pattern used for text matching.
     
     Note: For non-ASCII bytes (>= 128), we conservatively treat them as word
     boundaries. This is appropriate for binary files where we're looking for
