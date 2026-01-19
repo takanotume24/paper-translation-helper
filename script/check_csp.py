@@ -52,9 +52,8 @@ def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
     preceded by a non-alphanumeric/non-underscore character. This provides
     consistency with the \\bFunction\\() regex pattern used for text matching.
     
-    バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
-    単語境界: パターンの前が非英数字/アンダースコア、または文字列の先頭であること。
-    これによりテキストマッチング (\\bFunction\\() との一貫性を保つ。
+    Japanese: バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
+    単語境界とは、パターンの前が非英数字/アンダースコア、または文字列の先頭であること。
     """
     index = content.find(pattern)
     while index != -1:
@@ -62,13 +61,14 @@ def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
         if index == 0:
             return True
         prev_byte = content[index - 1]
-        # Check if previous byte is NOT alphanumeric or underscore
-        is_digit = ord('0') <= prev_byte <= ord('9')
-        is_upper = ord('A') <= prev_byte <= ord('Z')
-        is_lower = ord('a') <= prev_byte <= ord('z')
-        is_underscore = prev_byte == ord('_')
-        
-        if not (is_digit or is_upper or is_lower or is_underscore):
+        # For ASCII range bytes, check if it's alphanumeric or underscore
+        # We only check ASCII since the patterns we're looking for are ASCII
+        if prev_byte < 128:
+            prev_char = chr(prev_byte)
+            if not (prev_char.isalnum() or prev_char == '_'):
+                return True
+        else:
+            # Non-ASCII bytes are considered word boundaries for our purposes
             return True
         # Search for next occurrence
         index = content.find(pattern, index + 1)
