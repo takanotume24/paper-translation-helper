@@ -46,23 +46,31 @@ def find_inline_tags_in_index(
 
 
 def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
-    """バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
+    """Check if pattern appears with word boundary in binary content.
     
+    A word boundary means the pattern is either at the start of content or
+    preceded by a non-alphanumeric/non-underscore character. This provides
+    consistency with the \\bFunction\\() regex pattern used for text matching.
+    
+    バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
     単語境界: パターンの前が非英数字/アンダースコア、または文字列の先頭であること。
     これによりテキストマッチング (\\bFunction\\() との一貫性を保つ。
     """
     index = content.find(pattern)
     while index != -1:
-        # パターンの前が文字列の先頭、または非英数字/アンダースコアか確認
+        # Check if pattern is at start or preceded by non-word character
         if index == 0:
             return True
         prev_byte = content[index - 1]
-        # ASCII範囲の英数字とアンダースコアをチェック
-        # ord('0')=48, ord('9')=57, ord('A')=65, ord('Z')=90, ord('a')=97, ord('z')=122, ord('_')=95
-        if not ((48 <= prev_byte <= 57) or (65 <= prev_byte <= 90) or 
-                (97 <= prev_byte <= 122) or prev_byte == 95):
+        # Check if previous byte is NOT alphanumeric or underscore
+        is_digit = ord('0') <= prev_byte <= ord('9')
+        is_upper = ord('A') <= prev_byte <= ord('Z')
+        is_lower = ord('a') <= prev_byte <= ord('z')
+        is_underscore = prev_byte == ord('_')
+        
+        if not (is_digit or is_upper or is_lower or is_underscore):
             return True
-        # 次の出現箇所を探す
+        # Search for next occurrence
         index = content.find(pattern, index + 1)
     return False
 
