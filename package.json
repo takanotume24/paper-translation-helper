@@ -8,14 +8,19 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check:csp": "tsx ./script/check_csp.ts",
+    "ci:csp-check": "pnpm build && pnpm run check:csp"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "vue": "^3.5.27"
   },
   "devDependencies": {
+    "@types/node": "^20.19.30",
     "@vitejs/plugin-vue": "^6.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vitest": "^2.1.9"
