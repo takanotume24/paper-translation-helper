@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "script:check-csp": "tsx ./script/check_csp.ts",
-    "ci:csp-check": "pnpm build && pnpm run script:check-csp"
+    "check:csp": "tsx ./script/check_csp.ts",
+    "ci:csp-check": "pnpm build && pnpm run check:csp"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",

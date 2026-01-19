@@ -61,14 +61,21 @@ test("findDangerousPatterns - finds eval/new Function and detects binary pattern
     fs.writeFileSync(binaryPath, Buffer.from([0xff, 0xfe, 0xfd, 32, ...Buffer.from("Function(")]));
 
     // Spy on fs.readFileSync to force a throw when attempting to read c.bin as utf-8
-    const originalRead = fs.readFileSync.bind(fs) as unknown as (...args: any[]) => any;
-    const spy = vi.spyOn(fs, "readFileSync").mockImplementation((((...args: any[]) => {
-        const [full, opts] = args as [any, any];
-        if (typeof full === "string" && full === binaryPath && opts && opts.encoding === "utf-8") {
+    const originalRead = fs.readFileSync.bind(fs);
+    const spy = vi.spyOn(fs, "readFileSync").mockImplementation((...args: Parameters<typeof fs.readFileSync>) => {
+        const [full, opts] = args;
+        if (
+            typeof full === "string" &&
+            full === binaryPath &&
+            opts &&
+            typeof opts === "object" &&
+            "encoding" in opts &&
+            (opts as { encoding?: BufferEncoding }).encoding === "utf-8"
+        ) {
             throw new Error("invalid text encoding");
         }
         return originalRead(...args);
-    }) as any));
+    });
 
     const matches = findDangerousPatterns(tmp);
 
@@ -143,7 +150,7 @@ test("findDangerousPatterns - nested directories, boundary behavior and non-matc
     // a file with myFunction( should NOT match
     fs.writeFileSync(path.join(tmp, "not_a_match.js"), `function myFunction() { return 1 }\n`);
 
-    // a file with 'eval (' (space) should NOT match because regex expects 'eval('
+    // a file with 'eval (' (space) should NOW match because regex allows whitespace
     fs.writeFileSync(path.join(tmp, "space_eval.js"), `const x = eval ("1+1");\n`);
 
     const matches = findDangerousPatterns(tmp);
@@ -151,9 +158,11 @@ test("findDangerousPatterns - nested directories, boundary behavior and non-matc
     // inner.js should be present with relative path
     expect(matches.some(m => m[0] === path.join("sub", "inner.js"))).toBe(true);
 
-    // not_a_match.js and space_eval.js should NOT be present
+    // not_a_match.js should NOT be present
     expect(matches.some(m => m[0] === "not_a_match.js")).toBe(false);
-    expect(matches.some(m => m[0] === "space_eval.js")).toBe(false);
+
+    // space_eval.js should NOW be present (regex allows whitespace)
+    expect(matches.some(m => m[0] === "space_eval.js")).toBe(true);
 
     fs.rmSync(tmp, { recursive: true, force: true });
 });
@@ -174,13 +183,21 @@ test("findDangerousPatterns - binary fallback respects word boundaries", () => {
     fs.writeFileSync(binaryEval, Buffer.from([0xff, 0xee, ...Buffer.from("eval(")]));
 
     // Force readFileSync to throw for these files when reading as text so the binary branch runs
-    const originalRead = fs.readFileSync.bind(fs) as unknown as (...args: any[]) => any;
-    const spy = vi.spyOn(fs, "readFileSync").mockImplementation((((full: any, opts: any) => {
-        if (typeof full === "string" && (full === binaryGood || full === binaryBad || full === binaryEval) && opts && opts.encoding === "utf-8") {
+    const originalRead = fs.readFileSync.bind(fs);
+    const spy = vi.spyOn(fs, "readFileSync").mockImplementation((...args: Parameters<typeof fs.readFileSync>) => {
+        const [full, opts] = args;
+        if (
+            typeof full === "string" &&
+            (full === binaryGood || full === binaryBad || full === binaryEval) &&
+            opts &&
+            typeof opts === "object" &&
+            "encoding" in opts &&
+            (opts as { encoding?: BufferEncoding }).encoding === "utf-8"
+        ) {
             throw new Error("invalid text encoding");
         }
-        return originalRead(full, opts);
-    }) as any));
+        return originalRead(...args);
+    });
 
     const matches = findDangerousPatterns(tmp);
 

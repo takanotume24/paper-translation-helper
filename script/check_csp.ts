@@ -9,9 +9,14 @@
 import fs from "fs";
 import path from "path";
 
-const INDEX_SCRIPT_RE = /<script(?![^>]*\bsrc\b)[^>]*>[^<]/i;
+const INDEX_SCRIPT_RE = /<script(?![^>]*\bsrc\b\s*=)[^>]*>[^<]/i;
 const INDEX_STYLE_RE = /<style\b[^>]*>\s*[^<\s]/i;
-const DANGEROUS_RE = /eval\(|new Function\(|\bFunction\(/;
+const DANGEROUS_RE = /eval\s*\(|new\s+Function\s*\(|\bFunction\s*\(/;
+
+// Exit codes
+const EXIT_SUCCESS = 0;
+const EXIT_CSP_VIOLATION = 1;
+const EXIT_DIST_NOT_FOUND = 2;
 
 export function findInlineTagsInIndex(indexPath: string): [Array<[number, string]>, Array<[number, string]>] {
     const scripts: Array<[number, string]> = [];
@@ -88,8 +93,8 @@ export function findDangerousPatterns(rootDir: string): Array<[string, number | 
                 try {
                     const content = fs.readFileSync(full);
                     if (
-                        content.includes(Buffer.from("eval(")) ||
-                        content.includes(Buffer.from("new Function(")) ||
+                        hasPatternWithBoundary(content, Buffer.from("eval(")) ||
+                        hasPatternWithBoundary(content, Buffer.from("new Function(")) ||
                         hasPatternWithBoundary(content, Buffer.from("Function("))
                     ) {
                         matches.push([rel, null, "<binary file contains pattern>"]);
@@ -110,7 +115,7 @@ export function main(): number {
 
     if (!fs.existsSync("dist") || !fs.statSync("dist").isDirectory()) {
         console.error("Error: dist/ directory not found. Did you run the build?");
-        return 2;
+        return EXIT_DIST_NOT_FOUND;
     }
 
     const indexPath = path.join("dist", "index.html");
@@ -143,11 +148,11 @@ export function main(): number {
                 }
             }
         }
-        return 1;
+        return EXIT_CSP_VIOLATION;
     }
 
     console.log("CSP checks passed.");
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 if (!process.env.VITEST && process.env.NODE_ENV !== "test") {
