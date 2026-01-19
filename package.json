@@ -13,8 +13,8 @@
     "ci:csp-check": "pnpm build && pnpm run script:check-csp"
   },
   "dependencies": {
-    "vue": "^3.5.22",
-    "bootstrap": "^5.3.8"
+    "bootstrap": "^5.3.8",
+    "vue": "^3.5.27"
   },
   "devDependencies": {
     "vite": "^7.1.10",
