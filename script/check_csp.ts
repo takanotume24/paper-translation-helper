@@ -150,7 +150,7 @@ export function main(): number {
     return 0;
 }
 
-if (process.env.NODE_ENV !== "test") {
+if (!process.env.VITEST && process.env.NODE_ENV !== "test") {
     const code = main();
     process.exit(code);
 }
