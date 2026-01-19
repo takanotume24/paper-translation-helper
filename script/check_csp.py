@@ -19,7 +19,7 @@ import sys
 from typing import List, Tuple, Optional
 
 INDEX_SCRIPT_RE = re.compile(r"<script[^>]*>[^<]", re.IGNORECASE)
-INDEX_STYLE_RE = re.compile(r"<style[^>]*>[^<]", re.IGNORECASE)
+INDEX_STYLE_RE = re.compile(r"<style\b[^>]*>\s*[^<\s]", re.IGNORECASE)
 # Be case-sensitive: we want to detect expressions like "eval(" and "Function("
 # but not the common lowercase "function(" tokens in minified bundles.
 DANGEROUS_RE = re.compile(r"eval\(|new Function\(|\bFunction\(")
