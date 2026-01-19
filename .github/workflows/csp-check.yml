@@ -31,5 +31,8 @@ jobs:
       - name: Build Project
         run: pnpm build
 
+      - name: Run tests
+        run: pnpm test
+
       - name: Run CSP checks
-        run: pnpm run script:check-csp
+        run: pnpm run check:csp
