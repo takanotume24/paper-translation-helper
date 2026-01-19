@@ -3,7 +3,7 @@
 /**
  * CSP check script (TypeScript)
  *
- * Mirrors the behavior of the original Python script at ./script/check_csp.py
+ * Implements CSP checks for the built assets (originally implemented in Python).
  */
 
 import fs from "fs";
