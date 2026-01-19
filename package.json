@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "ci:csp-check": "pnpm build && sh ./script/check_csp.sh"
+    "ci:csp-check": "pnpm build && python3 ./script/check_csp.py"
   },
   "dependencies": {
     "vue": "^3.5.22",
