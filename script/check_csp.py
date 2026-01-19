@@ -45,6 +45,41 @@ def find_inline_tags_in_index(
     return scripts, styles
 
 
+def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
+    """Check if pattern appears with word boundary in binary content.
+    
+    A word boundary means the pattern is either at the start of content or
+    preceded by a non-alphanumeric/non-underscore character. This provides
+    consistency with the \\bFunction\\() regex pattern used for text matching.
+    
+    Note: For non-ASCII bytes (>= 128), we conservatively treat them as word
+    boundaries. This is appropriate for binary files where we're looking for
+    ASCII patterns like "Function(" and want to avoid false negatives.
+    
+    Japanese: バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
+    単語境界とは、パターンの前が非英数字/アンダースコア、または文字列の先頭であること。
+    """
+    index = content.find(pattern)
+    while index != -1:
+        # Check if pattern is at start or preceded by non-word character
+        if index == 0:
+            return True
+        prev_byte = content[index - 1]
+        # For ASCII range bytes, check if it's alphanumeric or underscore
+        # We only check ASCII since the patterns we're looking for are ASCII
+        if prev_byte < 128:
+            prev_char = chr(prev_byte)
+            if not (prev_char.isalnum() or prev_char == '_'):
+                return True
+        else:
+            # Non-ASCII bytes are conservatively treated as word boundaries
+            # This is appropriate for binary files with ASCII patterns
+            return True
+        # Search for next occurrence
+        index = content.find(pattern, index + 1)
+    return False
+
+
 def find_dangerous_patterns(root_dir: str) -> List[Tuple[str, Optional[int], str]]:
     """dist 配下を再帰的にスキャンして危険なパターンを探す。
 
@@ -66,10 +101,12 @@ def find_dangerous_patterns(root_dir: str) -> List[Tuple[str, Optional[int], str
                 try:
                     with open(path, "rb") as bf:
                         content = bf.read()
+                        # Pattern matching with word boundary consideration
+                        # 単語境界を考慮したパターンマッチング
                         if (
                             b"eval(" in content
                             or b"new Function(" in content
-                            or b"Function(" in content
+                            or _has_pattern_with_boundary(content, b"Function(")
                         ):
                             matches.append(
                                 (rel, None, "<binary file contains pattern>")
