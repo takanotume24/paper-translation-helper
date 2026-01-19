@@ -45,6 +45,28 @@ def find_inline_tags_in_index(
     return scripts, styles
 
 
+def _has_pattern_with_boundary(content: bytes, pattern: bytes) -> bool:
+    """バイナリコンテンツ内でパターンが単語境界を持って出現するか確認する。
+    
+    単語境界: パターンの前が非英数字/アンダースコア、または文字列の先頭であること。
+    これによりテキストマッチング (\\bFunction\\() との一貫性を保つ。
+    """
+    index = content.find(pattern)
+    while index != -1:
+        # パターンの前が文字列の先頭、または非英数字/アンダースコアか確認
+        if index == 0:
+            return True
+        prev_byte = content[index - 1]
+        # ASCII範囲の英数字とアンダースコアをチェック
+        # ord('0')=48, ord('9')=57, ord('A')=65, ord('Z')=90, ord('a')=97, ord('z')=122, ord('_')=95
+        if not ((48 <= prev_byte <= 57) or (65 <= prev_byte <= 90) or 
+                (97 <= prev_byte <= 122) or prev_byte == 95):
+            return True
+        # 次の出現箇所を探す
+        index = content.find(pattern, index + 1)
+    return False
+
+
 def find_dangerous_patterns(root_dir: str) -> List[Tuple[str, Optional[int], str]]:
     """dist 配下を再帰的にスキャンして危険なパターンを探す。
 
@@ -66,10 +88,11 @@ def find_dangerous_patterns(root_dir: str) -> List[Tuple[str, Optional[int], str
                 try:
                     with open(path, "rb") as bf:
                         content = bf.read()
+                        # 単語境界を考慮したパターンマッチング
                         if (
                             b"eval(" in content
                             or b"new Function(" in content
-                            or b"Function(" in content
+                            or _has_pattern_with_boundary(content, b"Function(")
                         ):
                             matches.append(
                                 (rel, None, "<binary file contains pattern>")
