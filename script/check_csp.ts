@@ -32,7 +32,7 @@ export function findInlineTagsInIndex(indexPath: string): [Array<[number, string
         }
     } catch (err: unknown) {
         if ((err as NodeJS.ErrnoException).code === "ENOENT") {
-            // Missing index is treated as empty lists (same as Python behaviour)
+            // Missing index is treated as empty lists
             return [scripts, styles];
         }
         throw err;
