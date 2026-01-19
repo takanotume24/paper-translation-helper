@@ -32,4 +32,4 @@ jobs:
         run: pnpm build
 
       - name: Run CSP checks
-        run: python3 ./script/check_csp.py
+        run: pnpm run script:check-csp
