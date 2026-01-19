@@ -18,6 +18,8 @@ import re
 import sys
 from typing import List, Tuple, Optional
 
+# Detects inline scripts: matches <script> tags without 'src' attribute that have content.
+# The negative lookahead (?![^>]*\bsrc\b) excludes external scripts like <script src="...">.
 INDEX_SCRIPT_RE = re.compile(r"<script(?![^>]*\bsrc\b)[^>]*>[^<]", re.IGNORECASE)
 INDEX_STYLE_RE = re.compile(r"<style[^>]*>[^<]", re.IGNORECASE)
 # Be case-sensitive: we want to detect expressions like "eval(" and "Function("
