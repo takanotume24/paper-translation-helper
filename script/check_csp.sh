@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -euxo pipefail
 
 # CSP チェックスクリプト
@@ -7,7 +7,7 @@ set -euxo pipefail
 #  - チェック項目: dist/index.html のインライン <script> / <style>、および dist 配下ファイルでの eval/new Function/Function の使用。
 # 使い方（ローカル）:
 #  - 事前にビルドを行ってください: `pnpm build`（または `npm run build`）
-#  - スクリプトを実行: `sh ./script/check_csp.sh`
+#  - スクリプトを実行: `bash ./script/check_csp.sh`
 
 echo "Running CSP checks..."
 
