@@ -4,6 +4,5 @@
         "Elian",
         "nvmrc",
         "uuidv"
-    ],
-    "deno.enable": true,
+    ]
 }

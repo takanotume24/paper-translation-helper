@@ -1,48 +1,37 @@
-import { splitIntoColumns } from '../split_into_columns.ts';
+import { test, expect } from "vitest";
+import { splitIntoColumns } from "../split_into_columns.ts";
 
-Deno.test('splitIntoColumns - should return an empty array for an empty input array', () => {
+test("splitIntoColumns - should return an empty array for an empty input array", () => {
     const result = splitIntoColumns([], 10);
-    if (JSON.stringify(result) !== JSON.stringify([])) {
-        throw new Error(`Test failed: expected [], got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual([]);
 });
 
-Deno.test('splitIntoColumns - should handle a single element', () => {
+test("splitIntoColumns - should handle a single element", () => {
     const result = splitIntoColumns(['Hello'], 10);
-    if (JSON.stringify(result) !== JSON.stringify([['Hello']])) {
-        throw new Error(`Test failed: expected [['Hello']], got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual([['Hello']]);
 });
 
-Deno.test('splitIntoColumns - should split multiple sentences into columns correctly', () => {
+test("splitIntoColumns - should split multiple sentences into columns correctly", () => {
     const result = splitIntoColumns(['Hello', 'World'], 10);
-    if (JSON.stringify(result) !== JSON.stringify([['Hello', 'World']])) {
-        throw new Error(`Test failed: expected [['Hello', 'World']], got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual([['Hello', 'World']]);
 });
 
-Deno.test('splitIntoColumns - should create a new column when the char limit is reached', () => {
+test("splitIntoColumns - should create a new column when the char limit is reached", () => {
     const result = splitIntoColumns(['Hello', 'World'], 5);
-    if (JSON.stringify(result) !== JSON.stringify([['Hello'], ['World']])) {
-        throw new Error(`Test failed: expected [['Hello'], ['World']], got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual([['Hello'], ['World']]);
 });
 
-Deno.test('splitIntoColumns - should place a long sentence in a new column', () => {
+test("splitIntoColumns - should place a long sentence in a new column", () => {
     const result = splitIntoColumns(['Hello', 'VeryVeryLongWord'], 10);
-    if (JSON.stringify(result) !== JSON.stringify([['Hello'], ['VeryVeryLongWord']])) {
-        throw new Error(`Test failed: expected [['Hello'], ['VeryVeryLongWord']], got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual([['Hello'], ['VeryVeryLongWord']]);
 });
 
-Deno.test('splitIntoColumns - should place a long sentence in a new column', () => {
+test("splitIntoColumns - should place a long sentence in a new column", () => {
     const result = splitIntoColumns(['VeryVeryLongWord', 'VeryVeryLongWord'], 10);
-    if (JSON.stringify(result) !== JSON.stringify([['VeryVeryLongWord'], ['VeryVeryLongWord']])) {
-        throw new Error(`Test failed: expected [['VeryVeryLongWord'], ['VeryVeryLongWord']], got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual([['VeryVeryLongWord'], ['VeryVeryLongWord']]);
 });
 
-Deno.test('splitIntoColumns - Should be able to split every 1000 characters.', () => {
+test("splitIntoColumns - Should be able to split every 1000 characters.", () => {
     const sample = [
         "Once upon a time in a distant land, there was a peaceful village nestled in the heart of a lush valley.",
         "Surrounded by towering mountains, the village was a haven for those who sought tranquility and a connection with nature.",
@@ -104,7 +93,5 @@ Deno.test('splitIntoColumns - Should be able to split every 1000 characters.', (
         ]
     ]
     const result = splitIntoColumns(sample, char_limit);
-    if (JSON.stringify(result) !== JSON.stringify(expect_result)) {
-        throw new Error(`Test failed: expected ${JSON.stringify(expect_result)}, got ${JSON.stringify(result)}`);
-    }
+    expect(result).toEqual(expect_result);
 });

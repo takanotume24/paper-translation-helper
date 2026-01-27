@@ -172,3 +172,8 @@ crashlytics-build.properties
 /dist/
 diff.txt
 .vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
